@@ -1,20 +1,39 @@
 import {useDispatch, useSelector} from "react-redux";
-import { decreaseBySymbol, increaseBySymbol } from './DoorKeypadSlice.ts';
+import { checkCorrectPassword, decreaseBySymbol, increaseBySymbol } from './DoorKeypadSlice.ts';
 import {RootState} from "../../app/store.ts";
 
 const DoorKeypad = () => {
     const doorKeypadValue = useSelector((state: RootState)=> {
-        return state.doorKeypad.value;
+      if(state.doorKeypad.message){
+        return state.doorKeypad.message;
+      } else{
+        if(state.doorKeypad.value.length < 5){
+          let result:string='';
+          for(let i =0; i < state.doorKeypad.value.length; i++){
+            result+='*';
+          }
+          return result;
+        }
+        else{
+          alert('Вы ввели больше 4 символов');
+        }
+      }
     });
+    const doorKeypadStyle = useSelector((state: RootState)=> {
+      return state.doorKeypad.style;
+    });
+
+
     const dispatch = useDispatch();
 
     const buttons = ['7', '8', '9', '4', '5', '6', '1', '2', '3'];
 
 
+
     return (
         <div className='container mt-5'>
           <div className='btns mx-auto mt-5'>
-            <input readOnly className='field-wrapper' type={"text"} value={doorKeypadValue}/>
+            <input readOnly  className={`field-wrapper bg-${doorKeypadStyle} text-center`} type={"text"}  value={doorKeypadValue}/>
             {buttons.map((button) => (
               <button key={button}
                       onClick={() => dispatch(increaseBySymbol(button))}
@@ -27,7 +46,7 @@ const DoorKeypad = () => {
                     onClick={() => dispatch(increaseBySymbol('0'))}
                     type='button'>{'0'}</button>
             <button
-                    onClick={() => dispatch(increaseBySymbol('g'))}
+                    onClick={() => dispatch( checkCorrectPassword())}
                     type='button'>{'E'}</button>
           </div>
         </div>

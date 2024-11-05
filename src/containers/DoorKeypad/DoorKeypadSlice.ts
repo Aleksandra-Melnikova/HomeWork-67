@@ -2,10 +2,19 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface DoorKeypadState {
     value: string;
+    style:string;
+    message:string
 }
 
 const initialState:DoorKeypadState = {
     value: '',
+  style:'',
+  message:''
+};
+const correctState:DoorKeypadState = {
+  value: '1337',
+  style:'',
+  message:'',
 };
 
 export const doorKeypadSlice = createSlice({
@@ -17,6 +26,16 @@ export const doorKeypadSlice = createSlice({
         },
       decreaseBySymbol: (state:DoorKeypadState) => {
         state.value = state.value.slice(0, state.value.length - 1);
+      },
+      checkCorrectPassword: (state:DoorKeypadState) => {
+          if(state.value === correctState.value) {
+            state.style = 'success';
+            state.message = "Access Granted";
+          }
+          else{
+            state.style = 'danger';
+            state.message = "Access Denied";
+          }
       }
 
     },
@@ -24,4 +43,4 @@ export const doorKeypadSlice = createSlice({
 
 export const doorKeypadReducer = doorKeypadSlice.reducer;
 
-export const {increaseBySymbol,  decreaseBySymbol} = doorKeypadSlice.actions;
+export const {increaseBySymbol,  decreaseBySymbol, checkCorrectPassword} = doorKeypadSlice.actions;
