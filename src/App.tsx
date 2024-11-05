@@ -1,15 +1,11 @@
 import "./App.css";
-import DoorKeypad from './containers/DoorKeypad/DoorKeypad.tsx';
+import DoorKeypad from "./containers/DoorKeypad/DoorKeypad.tsx";
 
 const App = () => {
-
-
   return (
     <>
-      <DoorKeypad/>
-
+      <DoorKeypad />
     </>
   );
-}
-;
+};
 export default App;

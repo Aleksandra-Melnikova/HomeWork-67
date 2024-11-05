@@ -1,11 +1,10 @@
-import {configureStore} from "@reduxjs/toolkit";
-import { doorKeypadReducer } from '../containers/DoorKeypad/DoorKeypadSlice.ts';
-
+import { configureStore } from "@reduxjs/toolkit";
+import { doorKeypadReducer } from "../containers/DoorKeypad/DoorKeypadSlice.ts";
 
 export const store = configureStore({
-    reducer:{
-        doorKeypad: doorKeypadReducer,
-    }
+  reducer: {
+    doorKeypad: doorKeypadReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
