@@ -13,7 +13,7 @@ const ToolBar = () => {
           </NavLink>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink className="nav-link fs-4" to="/calculator">
+              <NavLink className="nav-link fs-3 me-5" to="/calculator">
                 Calculator
               </NavLink>
             </li>
