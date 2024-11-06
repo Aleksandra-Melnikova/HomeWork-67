@@ -22,8 +22,10 @@ export const calculatorSlice = createSlice({
       state.value = "";
     },
     calculateTotal: (state: CalculatorState) => {
-      try {
+      try {if(eval(state.value)){
         state.value = eval(state.value);
+      }
+      else{ state.value = "";}
       } catch (error) {
         if (error) {
           state.value = "";
